@@ -1,15 +1,33 @@
 import { useState, useEffect } from 'react'
+import { PreparedResource, PreparedResponse } from './types'
+import prepareResponse from './utils/prepareResponse'
 
 const API_URL = 'https://test.openwheels.nl/api/'
 
 type ApiConfig = {
   method: 'search.map' | string
-  params: any
+  params: {
+    filter: {
+      onlyAvailable?: boolean
+      models?: string[]
+      fuelType?: string
+      towbar?: boolean
+      winterTires?: boolean
+    }
+    locationPoint: {
+      latitudeMax: number
+      latitudeMin: number
+      longitudeMax: number
+      longitudeMin: number
+    }
+  }
 }
 
 export const useApi = (config: ApiConfig) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [data, setData] = useState()
+  const [preparedResponse, setPreparedResponse] =
+    useState<PreparedResponse | null>(null)
 
   useEffect(() => {
     ;(async () => {
@@ -31,10 +49,13 @@ export const useApi = (config: ApiConfig) => {
         }),
       })
 
-      setData(await response.json())
+      const jsonData = await response.json()
+
+      setData(jsonData)
+      setPreparedResponse(prepareResponse(jsonData))
       setIsLoading(false)
     })()
   }, [setIsLoading, setData])
 
-  return { isLoading, data }
+  return { isLoading, data, preparedResponse }
 }
