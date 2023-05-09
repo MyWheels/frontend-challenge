@@ -2,8 +2,13 @@ import { useState, useEffect } from 'react'
 
 const API_URL = 'https://test.openwheels.nl/api/'
 
-export const useApi = ({ method, params }) => {
-  const [isLoading, setIsLoading] = useState(false)
+type ApiConfig = {
+  method: 'search.map' | string
+  params: any
+}
+
+export const useApi = (config: ApiConfig) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [data, setData] = useState()
 
   useEffect(() => {
@@ -21,8 +26,8 @@ export const useApi = ({ method, params }) => {
         body: JSON.stringify({
           jsonrpc: '2.0',
           id: 0,
-          method,
-          params,
+          method: config.method,
+          params: config.params,
         }),
       })
 
