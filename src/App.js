@@ -1,9 +1,9 @@
-import React from "react";
-import { useApi } from "./api";
+import React from 'react'
+import { useApi } from './api'
 
 export const App = () => {
   const { data, isLoading } = useApi({
-    method: "search.map",
+    method: 'search.map',
     params: {
       filter: {
         // onlyAvailable: false,
@@ -19,7 +19,7 @@ export const App = () => {
         longitudeMin: 1,
       },
     },
-  });
+  })
 
-  return isLoading ? <>Loading...</> : <>{JSON.stringify(data)}</>;
-};
+  return isLoading ? <>Loading...</> : <>{JSON.stringify(data)}</>
+}
