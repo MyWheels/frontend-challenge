@@ -20,7 +20,9 @@ function ResourceList(props: Props) {
             <div className="select-none cursor-pointer bg-gray-200 rounded-md flex flex-1 items-center p-4">
               <div className="flex-1 pl-1 mr-16">
                 <div className="font-medium">
-                  {resource.brand} {resource.model}
+                  {!resource.brand || !resource.model
+                    ? resource.alias
+                    : `${resource.brand} ${resource.model}`}
                 </div>
                 <div className="text-gray-600 text-sm">
                   {resource.fuelType} -{' '}

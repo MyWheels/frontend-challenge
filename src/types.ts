@@ -73,6 +73,7 @@ export type PreparedResource = {
   brand: string | null
   model: string | null
   address: string
+  alias: string
   fuelType: string | null
   availability: boolean
   ratePerHour: number

@@ -50,6 +50,7 @@ export const App = () => {
     filter,
   })
 
+  // TODO: implement pagination and ajax filtering instead of local filtering
   return (
     <Container>
       <div className="flex flex-col items-center justify-center min-h-screen py-2">

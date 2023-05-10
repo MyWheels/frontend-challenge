@@ -11,7 +11,7 @@ const response: Response = {
         resource: {
           id: 7,
           registrationPlate: 'AA-CD-05',
-          alias: 'owner wheels 5',
+          alias: 'Muscle Car',
           resourceType: 'car',
           brand: 'Ford',
           model: 'Mustang',
@@ -73,6 +73,7 @@ describe('prepareResponse', () => {
       brand: 'Ford',
       model: 'Mustang',
       address: 'Grevelingen 1 Utrecht',
+      alias: 'Muscle Car',
       fuelType: 'Electric',
       availability: true,
       ratePerHour: 3.25,

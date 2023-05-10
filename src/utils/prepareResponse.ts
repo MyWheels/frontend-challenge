@@ -7,6 +7,7 @@ function prepareResponse(response: Response): PreparedResponse {
       id: resultItem.resource.id,
       brand: resultItem.resource.brand,
       model: resultItem.resource.model,
+      alias: resultItem.resource.alias || '',
       address: `${resultItem.resource.location} ${resultItem.resource.streetNumber} ${resultItem.resource.city}`,
       fuelType: resultItem.resource.fuelType,
       availability: resultItem.resource.advertisement === null,
