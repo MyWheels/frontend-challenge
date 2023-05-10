@@ -26,7 +26,7 @@ export type Resource = {
   alias: string
   resourceType: string
   brand: string | null
-  model: string | null
+  model: Model | null
   color: string | null
   fuelType: string | null
   numberOfSeats: number
@@ -52,6 +52,27 @@ export type Resource = {
   rating_totals: null
 }
 
+type Model =
+  | '108'
+  | 'Aiways-model'
+  | 'C1'
+  | 'C1-5 Feel'
+  | 'C3 Feel'
+  | 'C4 Picasso'
+  | 'CAPTUR Intens'
+  | 'Citigo'
+  | 'Clio'
+  | 'Corsa'
+  | 'Evalia'
+  | 'Golf'
+  | 'Leaf'
+  | 'MEGANE Zen'
+  | 'Polar'
+  | 'ZOE'
+  | 'ZOE Life'
+  | 'ZOE Zen'
+  | 'e-Niro'
+
 type Price = {
   id: number
   hourRate: string
@@ -71,7 +92,7 @@ type Options = {
 export type PreparedResource = {
   id: number
   brand: string | null
-  model: string | null
+  model: Model | string | null
   address: string
   alias: string
   fuelType: string | null

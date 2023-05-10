@@ -2691,12 +2691,13 @@ function createTSUnion() {
     .filter((v, i, a) => a.indexOf(v) == i)
     .sort()
 
-  const joined = uniqueModels.join(`" | "`) // make it easy to copy/paste to create a union type
+  // copy this from the console (output: type Model = "model1" | "model2" | ...)
+  const stringUnion = `type Model = "${uniqueModels.join(`" | "`)}"` // make it easy to copy/paste to create a union type
 
   console.log({
     models,
     uniqueModels,
-    joined,
+    stringUnion,
   })
 }
 
