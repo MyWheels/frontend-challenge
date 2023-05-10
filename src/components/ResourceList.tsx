@@ -10,17 +10,25 @@ function ResourceList(props: Props) {
 
   return (
     <div>
-      <p>Found resources: {filteredResources.length}</p>
-      {filteredResources.map((resource) => (
-        <div key={resource.id}>
-          <p>Brand: {resource.brand}</p>
-          <p>Model: {resource.model}</p>
-          <p>Address: {resource.address}</p>
-          <p>Fuel type: {resource.fuelType}</p>
-          <p>Availability: {resource.availability ? 'Yes' : 'No'}</p>
-          <p>Rate per hour: {resource.ratePerHour}</p>
-        </div>
-      ))}
+      <p className="text-xl mt-4">Found {filteredResources.length} resources</p>
+      <ul className="mt-4 w-full flex flex-col items-center">
+        {filteredResources.map((resource) => (
+          <li key={resource.id} className="border-gray-400 flex flex-row mb-2">
+            <div className="select-none cursor-pointer bg-gray-200 rounded-md flex flex-1 items-center p-4">
+              <div className="flex-1 pl-1 mr-16">
+                <div className="font-medium">
+                  {resource.brand} {resource.model}
+                </div>
+                <div className="text-gray-600 text-sm">
+                  {resource.fuelType} -{' '}
+                  {resource.availability ? 'Available' : 'Not available'} - $
+                  {resource.ratePerHour}/hour
+                </div>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

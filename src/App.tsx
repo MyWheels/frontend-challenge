@@ -1,13 +1,18 @@
 import React, { ChangeEvent, useState } from 'react'
 import { useApi } from './api'
-import ResourceList from './components/ResourceList'
+import Container from './components/Container'
+import FilterForm from './components/filters/FilterForm'
 import { Filter } from './types'
+import Loader from './components/Loader'
+import NoData from './components/NoData'
+import ResourceList from './components/ResourceList'
 import getFilteredResources from './utils/getFilteredResources'
 
 export const App = () => {
   const { data, preparedResponse, isLoading } = useApi({
     method: 'search.map',
     params: {
+      // TODO: use filtering for the search
       filter: {
         // onlyAvailable: false,
         // models: ["Corsa"],
@@ -26,22 +31,19 @@ export const App = () => {
 
   const [filter, setFilter] = useState<Filter>({})
 
-  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) =>
     setFilter({ ...filter, model: event.target.value })
-  }
 
   const handleFilterChange =
-    (key: keyof Filter) => (event: ChangeEvent<HTMLInputElement>) => {
+    (key: keyof Filter) => (event: ChangeEvent<HTMLInputElement>) =>
       setFilter({ ...filter, [key]: event.target.value })
-    }
 
-  if (isLoading) {
-    return <>Loading...</>
-  }
+  const handleCheckboxChange = (key: keyof Filter, value: boolean) =>
+    setFilter({ ...filter, [key]: value })
 
-  if (!data) {
-    return <>No data</>
-  }
+  if (isLoading) return <Loader />
+
+  if (!data) return <NoData />
 
   const filteredResources = getFilteredResources({
     resources: preparedResponse?.results || [],
@@ -49,44 +51,18 @@ export const App = () => {
   })
 
   return (
-    <>
-      <input
-        type="text"
-        placeholder="Search model..."
-        onChange={handleSearch}
-      />
-      <input
-        type="text"
-        placeholder="Filter fuel type..."
-        onChange={handleFilterChange('fuelType')}
-      />
-      <label>
-        <input
-          type="checkbox"
-          onChange={(e) =>
-            setFilter({ ...filter, availability: e.target.checked })
-          }
+    <Container>
+      <div className="flex flex-col items-center justify-center min-h-screen py-2">
+        <FilterForm
+          searchPlaceholder="Search model..."
+          filterPlaceholder="Filter fuel type..."
+          filter={{ availability: false, winterTires: false, towbar: false }}
+          onSearchChange={handleSearch}
+          onFilterChange={handleFilterChange}
+          onCheckboxChange={handleCheckboxChange}
         />
-        Available
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          onChange={(e) =>
-            setFilter({ ...filter, winterTires: e.target.checked })
-          }
-        />
-        Winter Tires
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          onChange={(e) => setFilter({ ...filter, towbar: e.target.checked })}
-        />
-        Towbar
-      </label>
-      <ResourceList resources={filteredResources} filter={filter} />
-    </>
+        <ResourceList resources={filteredResources} filter={filter} />
+      </div>
+    </Container>
   )
-  // return isLoading ? <>Loading...</> : <>{JSON.stringify(data)}</>
 }
