@@ -10,7 +10,10 @@ function ResourceList(props: Props) {
 
   return (
     <div>
-      <p className="text-xl mt-4">Found {filteredResources.length} resources</p>
+      <p className="text-xl mt-4">
+        Found {filteredResources.length}{' '}
+        {filteredResources.length === 1 ? 'resources' : 'resource'}
+      </p>
       <ul className="mt-4 w-full flex flex-col items-center">
         {filteredResources.map((resource) => (
           <li key={resource.id} className="border-gray-400 flex flex-row mb-2">
