@@ -35,6 +35,11 @@ export const App = () => {
         longitudeMin: 1,
       },
     },
+    refetchOnPropsChange: [
+      filter.availability,
+      filter.towbar,
+      filter.winterTires,
+    ],
   })
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) =>

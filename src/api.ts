@@ -21,6 +21,7 @@ type ApiConfig = {
       longitudeMin: number
     }
   }
+  refetchOnPropsChange?: any[]
 }
 
 export const useApi = (config: ApiConfig) => {
@@ -28,6 +29,8 @@ export const useApi = (config: ApiConfig) => {
   const [data, setData] = useState<JSONResponse>()
   const [preparedResponse, setPreparedResponse] =
     useState<PreparedResponse | null>(null)
+
+  const refetchOnPropsChange = config.refetchOnPropsChange ?? []
 
   useEffect(() => {
     ;(async () => {
@@ -50,12 +53,11 @@ export const useApi = (config: ApiConfig) => {
       })
 
       const jsonData = await response.json()
-
       setData(jsonData)
       setPreparedResponse(prepareResponse(jsonData))
       setIsLoading(false)
     })()
-  }, [setIsLoading, setData])
+  }, [setIsLoading, setData, ...refetchOnPropsChange])
 
   return { isLoading, data, preparedResponse }
 }
