@@ -2680,3 +2680,33 @@ const response = {
   },
   id: 0,
 }
+
+function createTSUnion() {
+  // just de model names pls
+  const models = response.result.results.map((result) => result.resource.model)
+
+  // filter out the bs, remove duplicates and sort it
+  const uniqueModels = models
+    .filter(Boolean)
+    .filter((v, i, a) => a.indexOf(v) == i)
+    .sort()
+
+  const joined = uniqueModels.join(`" | "`) // make it easy to copy/paste to create a union type
+
+  console.log({
+    models,
+    uniqueModels,
+    joined,
+  })
+}
+
+/**
+ * Util to create a union type during compile time.
+ * Personally I would like to extract it using the createTSUnion code above
+ * @example
+ * const models = ['EVO', 'Mustang', '500 Abart'] as const;
+ * type Models = ReturnType<typeof createUnionType>(models); // 'EVO' | 'Mustang' | '500 Abart'
+ */
+function createUnionType<T extends string>(values: T[]): T {
+  return values.reduce((acc, value) => value)
+}
