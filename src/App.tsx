@@ -6,19 +6,27 @@ import { Filter } from './types'
 import Loader from './components/Loader'
 import NoData from './components/NoData'
 import ResourceList from './components/ResourceList'
-import getFilteredResources from './utils/getFilteredResources'
 
 export const App = () => {
+  const [filter, setFilter] = useState<Filter>({
+    availability: false,
+    // model: 'Corsa',
+    // models: ['Corsa'],
+    fuelType: '',
+    towbar: false,
+    winterTires: false,
+  })
+
   const { data, preparedResponse, isLoading } = useApi({
     method: 'search.map',
     params: {
       // TODO: use filtering for the search
       filter: {
-        // onlyAvailable: false,
-        // models: ["Corsa"],
-        // fuelType: "benzine",
-        // towbar: true,
-        // winterTires: true,
+        onlyAvailable: filter.availability,
+        // models: [filter.model],
+        fuelType: filter.fuelType || null,
+        towbar: filter.towbar,
+        winterTires: filter.winterTires,
       },
       locationPoint: {
         latitudeMax: 56,
@@ -28,8 +36,6 @@ export const App = () => {
       },
     },
   })
-
-  const [filter, setFilter] = useState<Filter>({})
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) =>
     setFilter({ ...filter, model: event.target.value })
@@ -45,11 +51,6 @@ export const App = () => {
 
   if (!data) return <NoData />
 
-  const filteredResources = getFilteredResources({
-    resources: preparedResponse?.results || [],
-    filter,
-  })
-
   // TODO: implement pagination and ajax filtering instead of local filtering
   return (
     <Container>
@@ -57,12 +58,15 @@ export const App = () => {
         <FilterForm
           searchPlaceholder="Search model..."
           filterPlaceholder="Filter fuel type..."
-          filter={{ availability: false, winterTires: false, towbar: false }}
+          filter={filter}
           onSearchChange={handleSearch}
           onFilterChange={handleFilterChange}
           onCheckboxChange={handleCheckboxChange}
         />
-        <ResourceList resources={filteredResources} filter={filter} />
+        <ResourceList
+          resources={preparedResponse?.results || []}
+          filter={filter}
+        />
       </div>
     </Container>
   )

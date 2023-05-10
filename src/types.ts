@@ -63,14 +63,16 @@ type Model =
   | 'Citigo'
   | 'Clio'
   | 'Corsa'
+  | 'EVO'
   | 'Evalia'
   | 'Golf'
   | 'Leaf'
   | 'MEGANE Zen'
+  | 'Mustang'
   | 'Polar'
-  | 'ZOE'
   | 'ZOE Life'
   | 'ZOE Zen'
+  | 'ZOE'
   | 'e-Niro'
 
 type Price = {
@@ -115,3 +117,5 @@ export type Filter = Partial<
     'model' | 'fuelType' | 'availability' | 'winterTires' | 'towbar'
   >
 >
+
+export type JSONResponse = any
