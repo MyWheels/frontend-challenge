@@ -1,6 +1,7 @@
 import React from 'react'
-import { Filter, PreparedResource } from '../types'
+import { SearchFilter, PreparedResource } from '../types'
 import getFilteredResources from '../utils/getFilteredResources'
+import ResourceListCard from './ResourceListCard'
 
 function ResourceList(props: Props) {
   const filteredResources = getFilteredResources({
@@ -12,26 +13,16 @@ function ResourceList(props: Props) {
     <div>
       <p className="text-xl mt-4">
         Found {filteredResources.length}{' '}
-        {filteredResources.length === 1 ? 'resources' : 'resource'}
+        {filteredResources.length === 1 ? 'resource' : 'resources'}
       </p>
-      <ul className="mt-4 w-full flex flex-col items-center">
+      <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {filteredResources.map((resource) => (
-          <li key={resource.id} className="border-gray-400 flex flex-row mb-2">
-            <div className="select-none cursor-pointer bg-gray-200 rounded-md flex flex-1 items-center p-4">
-              <div className="flex-1 pl-1 mr-16">
-                <div className="font-medium">
-                  {!resource.brand || !resource.model
-                    ? resource.alias
-                    : `${resource.brand} ${resource.model}`}
-                </div>
-                <div className="text-gray-600 text-sm">
-                  {resource.fuelType} -{' '}
-                  {resource.availability ? 'Available' : 'Not available'} - $
-                  {resource.ratePerHour}/hour
-                </div>
-              </div>
-            </div>
-          </li>
+          <div
+            key={resource.id}
+            className="transition-transform duration-300 ease-in-out transform delay-100"
+          >
+            <ResourceListCard resource={resource} />
+          </div>
         ))}
       </ul>
     </div>
@@ -40,7 +31,7 @@ function ResourceList(props: Props) {
 
 interface Props {
   resources: PreparedResource[]
-  filter: Filter
+  filter: SearchFilter
 }
 
 export default ResourceList
