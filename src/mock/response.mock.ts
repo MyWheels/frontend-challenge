@@ -2768,7 +2768,7 @@ function createTSUnion() {
 
 /**
  * Util to create a union type during compile time.
- * Personally I would like to extract it using the createTSUnion code above
+ * Personally, I would like to extract it using the createTSUnion code above
  * @example
  * const models = ['EVO', 'Mustang', '500 Abart'] as const;
  * type Models = ReturnType<typeof createUnionType>(models); // 'EVO' | 'Mustang' | '500 Abart'
