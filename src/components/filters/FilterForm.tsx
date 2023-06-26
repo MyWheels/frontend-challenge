@@ -1,15 +1,15 @@
 import React, { ChangeEvent } from 'react'
-import { Filter } from '../../types'
+import { SearchFilter } from '../../types'
 import Checkbox from './Checkbox'
 import Input from './Input'
 
 function FilterForm(props: Props) {
   return (
     <div>
-      <Input
-        placeholder={props.searchPlaceholder}
-        onChange={props.onSearchChange}
-      />
+      {/*<Input*/}
+      {/*  placeholder={props.searchPlaceholder}*/}
+      {/*  onChange={props.onSearchChange}*/}
+      {/*/>*/}
       <Input
         placeholder={props.filterPlaceholder}
         onChange={props.onFilterChange('fuelType')}
@@ -17,9 +17,9 @@ function FilterForm(props: Props) {
       <div className="mt-4">
         <Checkbox
           label="Available"
-          checked={props.filter.availability ?? false}
+          checked={props.filter.onlyAvailable ?? false}
           onChange={(ev) =>
-            props.onCheckboxChange('availability', ev.target.checked)
+            props.onCheckboxChange('onlyAvailable', ev.target.checked)
           }
         />
         <Checkbox
@@ -42,12 +42,12 @@ function FilterForm(props: Props) {
 interface Props {
   searchPlaceholder: string
   filterPlaceholder: string
-  filter: Filter
-  onSearchChange: (event: ChangeEvent<HTMLInputElement>) => void
+  filter: SearchFilter
+  onSelectModelChange: (model: string) => void
   onFilterChange: (
-    key: keyof Filter,
+    key: keyof SearchFilter,
   ) => (event: ChangeEvent<HTMLInputElement>) => void
-  onCheckboxChange: (key: keyof Filter, value: boolean) => void
+  onCheckboxChange: (key: keyof SearchFilter, value: boolean) => void
 }
 
 export default FilterForm

@@ -1,26 +1,12 @@
 import { useState, useEffect } from 'react'
-import { JSONResponse, PreparedResponse } from './types'
+import { SearchParams, JSONResponse, PreparedResponse } from './types'
 import prepareResponse from './utils/prepareResponse'
 
 const API_URL = 'https://test.openwheels.nl/api/'
 
 type ApiConfig = {
   method: 'search.map' | string
-  params: {
-    filter: {
-      onlyAvailable?: boolean | null
-      models?: string[]
-      fuelType?: string | null
-      towbar?: boolean | null
-      winterTires?: boolean | null
-    }
-    locationPoint: {
-      latitudeMax: number
-      latitudeMin: number
-      longitudeMax: number
-      longitudeMin: number
-    }
-  }
+  params: SearchParams
   refetchOnPropsChange?: any[]
 }
 
@@ -54,10 +40,35 @@ export const useApi = (config: ApiConfig) => {
 
       const jsonData = await response.json()
       setData(jsonData)
-      setPreparedResponse(prepareResponse(jsonData))
+      setPreparedResponse(prepareResponse(jsonData, config.params))
       setIsLoading(false)
     })()
   }, [setIsLoading, setData, ...refetchOnPropsChange])
 
   return { isLoading, data, preparedResponse }
 }
+
+const api = {
+  fetchResources: async (config: ApiConfig) => {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'x-ref': 'http://localhost:9009',
+        'X-Simple-Auth-App-Id':
+          '28_c3VwZXJzZWNyZXRteXdoZWVsc2NvZGluZ3Rlc3RzY3JldDhuMjdxdGc5ODdxM3R5',
+      },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        id: 0,
+        method: config.method,
+        params: config.params,
+      }),
+    })
+
+    const json = await response.json()
+    return prepareResponse(json, config.params)
+  },
+}
+
+export default api
