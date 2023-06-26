@@ -1,4 +1,67 @@
-const response = {
+import { Response } from '../types'
+
+export const responseMock: Response = {
+  jsonrpc: '2.0',
+  authenticated: false,
+  id: 1,
+  result: {
+    results: [
+      {
+        resource: {
+          id: 7,
+          registrationPlate: 'AA-CD-05',
+          alias: 'Muscle Car',
+          resourceType: 'car',
+          brand: 'Ford',
+          model: 'Mustang',
+          color: 'Black',
+          fuelType: 'Electric',
+          numberOfSeats: 4,
+          location: 'Grevelingen',
+          streetNumber: '1',
+          latitude: 52.090793,
+          longitude: 5.111107,
+          advertisement: null,
+          created: '2023-05-09 16:35',
+          city: 'Utrecht',
+          locktype: 'meeting',
+          parkingType: 'default',
+          fuelLevel: null,
+          fuelRange: null,
+          charging: false,
+          chargeAdapterConnected: null,
+          fuelRangeDefault: 0,
+          chargeAdapterConnectedSince: null,
+          price: {
+            id: 7,
+            hourRate: '3.25',
+            kilometerRate: '0.30',
+            fuelPerKilometer: '0.13',
+            dayRateTotal: '32.50',
+          },
+          options: {
+            id: 7,
+            automatic: false,
+            winterTires: false,
+            towbar: false,
+          },
+          locktypes: ['meeting'],
+          favorite: false,
+          rating_totals: null,
+        },
+        availability: undefined,
+        shouldDischarge: false,
+        distance: undefined,
+      },
+    ],
+    current: 1,
+    offset: 0,
+    limit: 10,
+    total: 1,
+  },
+}
+
+export const responseLargeMock = {
   jsonrpc: '2.0',
   authenticated: false,
   result: {
@@ -2683,7 +2746,9 @@ const response = {
 
 function createTSUnion() {
   // just de model names pls
-  const models = response.result.results.map((result) => result.resource.model)
+  const models = responseLargeMock.result.results.map(
+    (result) => result.resource.model,
+  )
 
   // filter out the bs, remove duplicates and sort it
   const uniqueModels = models
