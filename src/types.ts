@@ -13,11 +13,41 @@ type Result = {
   total: number
 }
 
+export interface Availability {
+  status: 'available' | 'partially_available' | 'unavailable'
+  beginAvailable?: Datetime
+  endAvailable?: Datetime
+  requested: ApiTimeframe
+}
+
+export enum ParkingType {
+  Default = 'default',
+  Spot = 'parking_spot',
+  Zone = 'zone',
+  FreeFloat = 'free_float',
+}
+
+export type Datetime = string
+
+export interface ApiTimeframe {
+  startDate: Datetime
+  endDate: Datetime
+  namedPrediction?: 'today' | 'now' | 'tomorrow'
+}
+
+export type LocationPoint = {
+  latitudeMin: number
+  latitudeMax: number
+  longitudeMin: number
+  longitudeMax: number
+}
+
 type ResultItem = {
   resource: Resource
-  availability: boolean | null
+  // availability: boolean | null
+  availability?: Availability
   shouldDischarge: boolean
-  distance: null // ??
+  distance?: number // ??
 }
 
 export type Resource = {
@@ -52,7 +82,7 @@ export type Resource = {
   rating_totals: null
 }
 
-type Model =
+export type Model =
   | '108'
   | 'Aiways-model'
   | 'C1'
@@ -98,7 +128,9 @@ export type PreparedResource = {
   address: string
   alias: string
   fuelType: string | null
-  availability: boolean
+  color: string | null
+  availability: Availability | undefined
+  availabilityStatus: string
   ratePerHour: number
   winterTires: boolean
   towbar: boolean
@@ -111,11 +143,33 @@ export type PreparedResponse = {
   results: PreparedResource[]
 } & Pick<Result, 'current' | 'offset' | 'limit' | 'total'>
 
-export type Filter = Partial<
-  Pick<
-    PreparedResource,
-    'model' | 'fuelType' | 'availability' | 'winterTires' | 'towbar'
-  >
->
+export interface SearchParams {
+  filter?: SearchFilter
+  locationPoint: LocationPoint
+  timeFrame?: ApiTimeframe
+}
+
+export interface SearchFilter {
+  fuelType?: string | null
+  parkingType?: ParkingType
+  resourceTypes?: string[]
+  models?: Model[]
+  fuelLevel?: number
+  onlyFavorites?: boolean
+  onlyAvailable?: boolean
+  onlyDischarging?: boolean
+  onlyCleaning?: boolean
+  cleaningScore?: number
+  automatic?: boolean
+  winterTires?: boolean
+  towbar?: boolean
+}
+
+// export type Filter = Partial<
+//   Pick<PreparedResource, 'model' | 'fuelType' | 'availability'> &
+//     Pick<Options, 'automatic' | 'winterTires' | 'towbar'> & {
+//       onlyAvailable?: boolean
+//     }
+// >
 
 export type JSONResponse = any
