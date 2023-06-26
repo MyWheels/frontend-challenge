@@ -5,9 +5,11 @@
   "main": "src/index.tsx",
   "scripts": {
     "dev": "webpack-dev-server --open --hot --mode development --port 9009",
-    "test": "jest test"
+    "test": "jest test --verbose true",
+    "test:watch": "jest test --verbose true --watch"
   },
   "dependencies": {
+    "mapbox-gl": "^2.14.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
