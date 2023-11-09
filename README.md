@@ -94,5 +94,35 @@ As a bonus one of the following additional features could be added to the applic
 - [x] Convert the code to use TypeScript
 - [ ] Use [Next.js](https://nextjs.org/docs/) instead of the Webpack setup.
 - [ ] Add a personal touch by styling the application.
-- [ ] Pitch an idea for a great additional feature and show (in rough lines) how that could be implemented.
+- [x] Pitch an idea for a great additional feature and show (in rough lines) how that could be implemented.
 
+
+### Idea pitch
+
+**Suggested Feature**: "MyWheels Favorites"
+
+**Feature Description**:
+Implement a "Favorites" feature that allows users to mark certain cars as their favorites. This feature will enable users to quickly access the cars they are most interested in, enhancing the user experience.
+
+**Rough Implementation Outline**:
+
+- **User Interface Update**:
+   - Add a "heart" icon or a similar symbol to each car listing.
+   - Users can click this icon to add the car to their list of favorites.
+   - Highlighted or filled-in icons indicate that a car is a favorite.
+
+- **State Management**:
+   - Implement a state to track user's favorite cars.
+   - This could be local state initially, with potential to sync with user profiles for registered users in the future.
+
+- **Favorites View**:
+   - Add a new section or a filter in the application that displays only the user's favorite cars.
+   - Ensure this view is easily accessible from the main interface.
+
+- **Data Persistence**:
+   - Initially, use local storage to persist the favorites.
+   - In the long term, integrate this feature with a backend to save favorites per user account.
+
+- **User Testing and Feedback**:
+   - After implementation, conduct user testing to gather feedback.
+   - Iterate on the feature based on the feedback to enhance its usability and functionality.
