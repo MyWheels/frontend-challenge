@@ -5,7 +5,6 @@ import NoData from './NoData'
 import ResourceListCard from './ResourceListCard'
 
 function ResourceList(props: Props) {
-  console.log('props.resources', props.resources)
   return isEmpty(props.resources) ? (
     <NoData />
   ) : (
