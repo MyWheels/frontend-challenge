@@ -63,6 +63,11 @@ This command triggers the vercel --prod command, which deploys the latest build 
 
 Ensure you have configured your Vercel project settings properly before deploying. For detailed instructions on setting up Vercel deployment, refer to the official [Vercel documentation](https://vercel.com/docs).
 
+## Demo
+
+You can explore a live demo of the application [here](https://mywheels-frontend-challenge.vercel.app/). 
+Please note that due to CORS restrictions on the API used for this challenge, some features may not be fully operational.
+
 ## Assignment
 
 Create a small application that displays a list of resources (cars) that are provided by the API. Use the `useApi` method provided in `src/api.js` to fetch the JSON containing the resources.
@@ -90,3 +95,4 @@ As a bonus one of the following additional features could be added to the applic
 - Use [Next.js](https://nextjs.org/docs/) instead of the Webpack setup.
 - Add a personal touch by styling the application.
 - Pitch an idea for a great additional feature and show (in rough lines) how that could be implemented.
+
