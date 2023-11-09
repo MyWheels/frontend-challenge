@@ -8,6 +8,7 @@ describe('getFilteredResources', () => {
     const filteredResources = getFilteredResources({
       resources: preparedResourcesMock,
       filter,
+      searchQuery: '',
     })
     expect(filteredResources).toEqual(preparedResourcesMock)
   })
@@ -17,6 +18,7 @@ describe('getFilteredResources', () => {
     const filteredResources = getFilteredResources({
       resources: preparedResourcesMock,
       filter,
+      searchQuery: '',
     })
     expect(filteredResources).toEqual([preparedResourcesMock[1]])
   })
@@ -26,6 +28,7 @@ describe('getFilteredResources', () => {
     const filteredResources = getFilteredResources({
       resources: preparedResourcesMock,
       filter,
+      searchQuery: '',
     })
     expect(filteredResources).toEqual([preparedResourcesMock[0]])
   })
@@ -35,6 +38,7 @@ describe('getFilteredResources', () => {
     const filteredResources = getFilteredResources({
       resources: preparedResourcesMock,
       filter,
+      searchQuery: '',
     })
     expect(filteredResources).toEqual([preparedResourcesMock[0]])
   })
@@ -44,6 +48,7 @@ describe('getFilteredResources', () => {
     const filteredResources = getFilteredResources({
       resources: preparedResourcesMock,
       filter,
+      searchQuery: '',
     })
     expect(filteredResources).toEqual([
       preparedResourcesMock[0],
@@ -56,6 +61,7 @@ describe('getFilteredResources', () => {
     const filteredResources = getFilteredResources({
       resources: preparedResourcesMock,
       filter,
+      searchQuery: '',
     })
     expect(filteredResources).toEqual([preparedResourcesMock[0]])
   })
@@ -65,6 +71,7 @@ describe('getFilteredResources', () => {
     const filteredResources = getFilteredResources({
       resources: preparedResourcesMock,
       filter,
+      searchQuery: '',
     })
     expect(filteredResources).toEqual([
       preparedResourcesMock[0],
@@ -80,6 +87,7 @@ describe('getFilteredResources', () => {
     const filteredResources = getFilteredResources({
       resources: preparedResourcesMock,
       filter,
+      searchQuery: '',
     })
     expect(filteredResources).toEqual([preparedResourcesMock[1]])
   })

@@ -6,10 +6,7 @@ import Input from './Input'
 function FilterForm(props: Props) {
   return (
     <div>
-      {/*<Input*/}
-      {/*  placeholder="Search..."*/}
-      {/*  onChange={props.onSearchChange}*/}
-      {/*/>*/}
+      <Input placeholder="Search..." onChange={props.onSearchChange} />
       <Input
         placeholder="Filter fuel type..."
         onChange={props.onFilterChange('fuelType')}
@@ -41,6 +38,7 @@ function FilterForm(props: Props) {
 
 interface Props {
   filter: SearchFilter
+  onSearchChange: (event: ChangeEvent<HTMLInputElement>) => void
   onFilterChange: (
     key: keyof SearchFilter,
   ) => (event: ChangeEvent<HTMLInputElement>) => void

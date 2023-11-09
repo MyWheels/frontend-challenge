@@ -22,7 +22,7 @@ export const preparedResourcesMock: PreparedResource[] = [
     id: 2,
     brand: 'Volkswagen',
     model: 'Golf',
-    alias: 'Gold GTI',
+    alias: 'Golf GTI',
     address: 'Address 2',
     fuelType: 'Electric',
     color: 'Really White',

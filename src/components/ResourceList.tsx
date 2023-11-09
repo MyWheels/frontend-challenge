@@ -1,10 +1,14 @@
 import React from 'react'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 import isEmpty from '../utils/isEmpty'
 import NoData from './NoData'
 import { PaginateResult } from './pagination/paginate'
 import ResourceListCard from './ResourceListCard'
 
 function ResourceList(props: Props) {
+  const [parent] = useAutoAnimate()
+
+  console.log('ResourceList', props.resources)
   return isEmpty(props.resources) ? (
     <NoData />
   ) : (
@@ -14,7 +18,10 @@ function ResourceList(props: Props) {
           props.totalItems
         } vehicles`}
       </p>
-      <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul
+        className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        ref={parent}
+      >
         {props.resources.map((resource) => (
           <div
             key={resource.id}
