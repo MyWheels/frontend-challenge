@@ -129,7 +129,7 @@ export const App = () => {
           <Loader />
         ) : (
           <ResourceList
-            paginateResult={paginateResult}
+            {...paginateResult}
             totalItems={filteredResources.length}
           />
         )}
