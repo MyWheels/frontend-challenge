@@ -89,10 +89,10 @@ Create a small application that displays a list of resources (cars) that are pro
 
 As a bonus one of the following additional features could be added to the application.
 
-- Create automated tests for (a part) of the application.
-- Add the option to toggle between a list view and a map view.
-- Convert the code to use TypeScript
-- Use [Next.js](https://nextjs.org/docs/) instead of the Webpack setup.
-- Add a personal touch by styling the application.
-- Pitch an idea for a great additional feature and show (in rough lines) how that could be implemented.
+- [x] Create automated tests for (a part) of the application.
+- [ ] Add the option to toggle between a list view and a map view.
+- [x] Convert the code to use TypeScript
+- [ ] Use [Next.js](https://nextjs.org/docs/) instead of the Webpack setup.
+- [ ] Add a personal touch by styling the application.
+- [ ] Pitch an idea for a great additional feature and show (in rough lines) how that could be implemented.
 
