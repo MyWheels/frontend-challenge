@@ -8,7 +8,6 @@ import ResourceListCard from './ResourceListCard'
 function ResourceList(props: Props) {
   const [parent] = useAutoAnimate()
 
-  console.log('ResourceList', props.resources)
   return isEmpty(props.resources) ? (
     <NoData />
   ) : (
