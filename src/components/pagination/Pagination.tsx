@@ -6,8 +6,10 @@ function Pagination(props: Props) {
     props.onPageChange(page)
   }
 
+  const totalPages = Math.ceil(props.totalItems / props.itemsPerPage)
+
   const pagesNumbers = Array.from(
-    { length: props.totalPages },
+    { length: totalPages },
     (_, index) => index + 1,
   )
 
@@ -26,7 +28,8 @@ function Pagination(props: Props) {
 }
 interface Props {
   currentPage: number
-  totalPages: number
+  totalItems: number
+  itemsPerPage: number
   onPageChange: (page: number) => void
 }
 

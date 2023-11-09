@@ -1,22 +1,21 @@
 import React from 'react'
-import { SearchFilter, PreparedResource } from '../types'
-import getFilteredResources from '../utils/getFilteredResources'
+import { PreparedResource } from '../types'
+import isEmpty from '../utils/isEmpty'
+import NoData from './NoData'
 import ResourceListCard from './ResourceListCard'
 
 function ResourceList(props: Props) {
-  const filteredResources = getFilteredResources({
-    resources: props.resources,
-    filter: props.filter,
-  })
-
-  return (
+  console.log('props.resources', props.resources)
+  return isEmpty(props.resources) ? (
+    <NoData />
+  ) : (
     <div>
       <p className="text-xl mt-4">
-        Found {filteredResources.length}{' '}
-        {filteredResources.length === 1 ? 'resource' : 'resources'}
+        Found {props.resources.length}{' '}
+        {props.resources.length === 1 ? 'resource' : 'resources'}
       </p>
       <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {filteredResources.map((resource) => (
+        {props.resources.map((resource) => (
           <div
             key={resource.id}
             className="transition-transform duration-300 ease-in-out transform delay-100"
@@ -31,7 +30,6 @@ function ResourceList(props: Props) {
 
 interface Props {
   resources: PreparedResource[]
-  filter: SearchFilter
 }
 
 export default ResourceList

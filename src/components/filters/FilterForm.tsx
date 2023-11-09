@@ -7,11 +7,11 @@ function FilterForm(props: Props) {
   return (
     <div>
       {/*<Input*/}
-      {/*  placeholder={props.searchPlaceholder}*/}
+      {/*  placeholder="Search..."*/}
       {/*  onChange={props.onSearchChange}*/}
       {/*/>*/}
       <Input
-        placeholder={props.filterPlaceholder}
+        placeholder="Filter fuel type..."
         onChange={props.onFilterChange('fuelType')}
       />
       <div className="mt-4">
@@ -40,10 +40,7 @@ function FilterForm(props: Props) {
 }
 
 interface Props {
-  searchPlaceholder: string
-  filterPlaceholder: string
   filter: SearchFilter
-  onSelectModelChange: (model: string) => void
   onFilterChange: (
     key: keyof SearchFilter,
   ) => (event: ChangeEvent<HTMLInputElement>) => void

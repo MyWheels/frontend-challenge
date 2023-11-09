@@ -54,7 +54,7 @@ function ResourceListCard({
         <div className="text-xs text-gray-500 text-center">per uur</div>
       </div>
       <div className="flex flex-col transition-opacity duration-300 ease-in-out">
-        <div className="text-lg font-semibold text-gray-900 truncate">
+        <div className="text-lg font-semibold text-gray-900 break-words">
           {resource.address}
           {typeof distance === 'number' && (
             <span className="ml-2 text-sm text-gray-500">

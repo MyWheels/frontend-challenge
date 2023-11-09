@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { SearchParams, JSONResponse, PreparedResponse } from './types'
 import prepareResponse from './utils/prepareResponse'
 
-const API_URL = 'https://test.openwheels.nl/api/'
+const API_URL = 'https://openwheels.nl/api/'
 
 type ApiConfig = {
   method: 'search.map' | string
