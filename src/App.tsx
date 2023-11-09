@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useEffect, useMemo, useState } from 'react'
-import api from './api'
+import React, { ChangeEvent, useMemo, useState } from 'react'
+import { useApi } from './api'
 import Container from './components/Container'
 import FilterForm from './components/filters/FilterForm'
 import Loader from './components/Loader'
@@ -7,15 +7,12 @@ import Pagination from './components/pagination/Pagination'
 import paginate from './components/pagination/paginate'
 import ResourceList from './components/ResourceList'
 import getFilteredResources from './utils/getFilteredResources'
-import { PreparedResponse, SearchFilter } from './types'
+import { SearchFilter } from './types'
 
-const ITEMS_PER_PAGE = 5
+const ITEMS_PER_PAGE = 10
 
 export const App = () => {
   const [currentPage, setCurrentPage] = useState(1)
-  const [preparedResponse, setPreparedResponse] =
-    useState<PreparedResponse | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
 
   const [filter, setFilter] = useState<SearchFilter>({
     onlyAvailable: false,
@@ -26,32 +23,21 @@ export const App = () => {
     winterTires: false,
   })
 
-  const fetchData = async () => {
-    setIsLoading(true)
-
-    const preparedResponse = await api.fetchResources({
-      method: 'search.map',
-      params: {
-        filter: {
-          ...filter,
-          fuelType: filter.fuelType || null,
-        },
-        locationPoint: {
-          latitudeMax: 56,
-          latitudeMin: 48,
-          longitudeMax: 9,
-          longitudeMin: 1,
-        },
+  const { preparedResponse, isLoading } = useApi({
+    method: 'search.map',
+    params: {
+      filter: {
+        ...filter,
+        fuelType: filter.fuelType || null,
       },
-    })
-
-    setPreparedResponse(preparedResponse)
-    setIsLoading(false)
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, [])
+      locationPoint: {
+        latitudeMax: 56,
+        latitudeMin: 48,
+        longitudeMax: 9,
+        longitudeMin: 1,
+      },
+    },
+  })
 
   // const fetchData = async () => {
   //   const { data, preparedResponse, isLoading } = useApi({

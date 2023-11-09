@@ -10,6 +10,8 @@ type ApiConfig = {
   refetchOnPropsChange?: any[]
 }
 
+const LIMIT_RESULTS: number | null = 100
+
 export const useApi = (config: ApiConfig) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [data, setData] = useState<JSONResponse>()
@@ -22,7 +24,7 @@ export const useApi = (config: ApiConfig) => {
     ;(async () => {
       setIsLoading(true)
 
-      const response = await fetch(API_URL, {
+      const res = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -38,9 +40,21 @@ export const useApi = (config: ApiConfig) => {
         }),
       })
 
-      const jsonData = await response.json()
-      setData(jsonData)
-      setPreparedResponse(prepareResponse(jsonData, config.params))
+      const json = await res.json()
+
+      const data = {
+        ...json,
+        result: {
+          ...json.result,
+          // temporary solution to limit the number of results until I figure out the api option to limit the number of results
+          results: LIMIT_RESULTS
+            ? json.result.results.slice(0, LIMIT_RESULTS)
+            : json.result.results,
+        },
+      }
+
+      setData(data)
+      setPreparedResponse(prepareResponse(data, config.params))
       setIsLoading(false)
     })()
   }, [setIsLoading, setData, ...refetchOnPropsChange])
@@ -67,7 +81,18 @@ const api = {
     })
 
     const json = await response.json()
-    return prepareResponse(json, config.params)
+    const data = {
+      ...json,
+      result: {
+        ...json.result,
+        // temporary solution to limit the number of results until I figure out the api option to limit the number of results
+        results: LIMIT_RESULTS
+          ? json.result.results.slice(0, LIMIT_RESULTS)
+          : json.result.results,
+      },
+    }
+
+    return prepareResponse(data, config.params)
   },
 }
 
