@@ -1,13 +1,15 @@
 {
-  "name": "frontend-challenge",
+  "name": "mywheels-frontend-challenge",
   "version": "0.0.0",
   "license": "MIT",
   "main": "src/index.tsx",
   "proxy": "https://openwheels.nl",
   "scripts": {
     "dev": "webpack-dev-server --open --hot --mode development --port 9009",
+    "build": "webpack --mode production",
     "test": "jest test --verbose true",
-    "test:watch": "jest test --verbose true --watch"
+    "test:watch": "jest test --verbose true --watch",
+    "deploy": "vercel --prod"
   },
   "dependencies": {
     "mapbox-gl": "^2.15.0",
@@ -40,6 +42,7 @@
     "ts-loader": "^9.5.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2",
+    "vercel": "^32.5.3",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.7.4"

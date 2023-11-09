@@ -6,6 +6,63 @@
 - Run the development server: `yarn dev`
 - Execute the tests: `yarn test`
 
+## Installation
+
+Before starting, make sure you have [Node.js](https://nodejs.org/) installed on your machine. Then, follow these steps to install the necessary dependencies for the project:
+
+```bash
+# Clone the repository
+git clone https://github.com/YassineGherbi/mywheels-frontend-challenge.git
+# Navigate to the project directory
+cd mywheels-frontend-challenge
+# Install dependencies
+yarn install
+```
+
+## Running the Application Locally
+
+To run the application on your local machine, execute the following command:
+
+```bash
+yarn dev
+```
+
+This will start a development server on port 9009. You can access the application by navigating to http://localhost:9009 in your browser.
+
+## Testing
+
+The project is set up to use Jest for testing. You can run the tests using the following command:
+
+```bash
+yarn test
+```
+
+To watch for changes and re-run tests, use:
+
+```bash
+yarn test:watch
+```
+
+## Building for Production
+
+To create a production build, run:
+
+```bash
+yarn build
+```
+
+## Deploying to Vercel
+
+The project is set up for easy deployment to Vercel. Ensure you have the Vercel CLI installed as a local dependency. You can deploy the application to production using the following command:
+
+```bash
+yarn deploy
+```
+
+This command triggers the vercel --prod command, which deploys the latest build to the production environment.
+
+Ensure you have configured your Vercel project settings properly before deploying. For detailed instructions on setting up Vercel deployment, refer to the official [Vercel documentation](https://vercel.com/docs).
+
 ## Assignment
 
 Create a small application that displays a list of resources (cars) that are provided by the API. Use the `useApi` method provided in `src/api.js` to fetch the JSON containing the resources.
