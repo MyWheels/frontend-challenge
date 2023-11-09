@@ -100,7 +100,7 @@ export const App = () => {
     [preparedResponse?.results, filter],
   )
 
-  const paginatedFilteredResources = useMemo(
+  const paginateResult = useMemo(
     () =>
       paginate({
         currentPage,
@@ -128,7 +128,10 @@ export const App = () => {
         {isLoading ? (
           <Loader />
         ) : (
-          <ResourceList resources={paginatedFilteredResources || []} />
+          <ResourceList
+            paginateResult={paginateResult}
+            totalItems={filteredResources.length}
+          />
         )}
         <Pagination
           currentPage={currentPage}
